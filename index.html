@@ -377,22 +377,31 @@
     <script>
       document.addEventListener("alpine:init", () => {
         Alpine.data("miniWallpapers", () => ({
+          // Tabs
           tabs: ["general", "text", "lines", "linesEnds"],
           activeTab: "general",
+
+          // General
           deviceSelect: "640x1136",
           canvasHeight: 1136,
           canvasWidth: 640,
           canvasBackgroundColor: "#ffffff",
+
+          // Text
           canvasText: "lorem",
           canvasTextFontColor: "#000000",
           canvasTextFontSize: 16,
           canvasTextFontStyle: [],
+
+          // Lines
           linesNumber: 5,
           linesColor: "#000000",
           linesHeight: 20,
           linesSpacing: 20,
           linesWidth: 2,
           linesPyramidalShape: 0,
+
+          // Lines ends
           linesEndsColor: "#000000",
           linesEndsType: "arrow",
           linesEndsWidth: 2,
