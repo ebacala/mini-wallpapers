@@ -56,13 +56,9 @@
               <option value="750x1334">iPhone 6/7/8 (750x1334)</option>
               <option value="1080x1920">iPhone 6/7/8 Plus (1080x1920)</option>
               <option value="1125x2436">iPhone X/XS/11 Pro (1125x2436)</option>
-              <option value="1242x2688">
-                iPhone XS Max/11 Pro Max (1242x2688)
-              </option>
+              <option value="1242x2688">iPhone XS Max/11 Pro Max (1242x2688)</option>
               <option value="1170x2532">iPhone 12/13/14 (1170x2532)</option>
-              <option value="1284x2778">
-                iPhone 12/13/14 Pro Max (1284x2778)
-              </option>
+              <option value="1284x2778">iPhone 12/13/14 Pro Max (1284x2778)</option>
               <option value="1290x2796">iPhone 15 Pro Max (1290x2796)</option>
               <option value="2560x1600">MacBook Air 13" (2560x1600)</option>
               <option value="3024x1964">MacBook Pro 14" (3024x1964)</option>
@@ -75,7 +71,7 @@
             <input
               type="color"
               id="inputBackgroundColor"
-              x-model="canvasBackgroundColor"
+              x-model="svgProperties.canvasBackgroundColor"
             />
           </div>
         </div>
@@ -87,7 +83,7 @@
               type="text"
               id="inputText"
               placeholder="Enter text here"
-              x-model="canvasText"
+              x-model="svgProperties.canvasText"
             />
           </div>
 
@@ -99,7 +95,7 @@
               min="10"
               max="30"
               step="1"
-              x-model.number="canvasTextFontSize"
+              x-model.number="svgProperties.canvasTextFontSize"
             />
           </div>
 
@@ -109,52 +105,52 @@
               <label
                 for="inputTextFontStyleBold"
                 style="font-weight: bold"
-                :class="{ active: canvasTextFontStyle.includes('bold') }"
+                :class="{ active: svgProperties.canvasTextFontStyle.includes('bold') }"
                 >B</label
               >
               <input
                 type="checkbox"
                 id="inputTextFontStyleBold"
                 value="bold"
-                x-model="canvasTextFontStyle"
+                x-model="svgProperties.canvasTextFontStyle"
               />
 
               <label
                 for="inputTextFontStyleItalic"
                 style="font-style: italic"
-                :class="{ active: canvasTextFontStyle.includes('italic') }"
+                :class="{ active: svgProperties.canvasTextFontStyle.includes('italic') }"
                 >I</label
               >
               <input
                 type="checkbox"
                 id="inputTextFontStyleItalic"
                 value="italic"
-                x-model="canvasTextFontStyle"
+                x-model="svgProperties.canvasTextFontStyle"
               />
 
               <label
                 for="inputTextFontStyleUnderline"
                 style="text-decoration: underline"
-                :class="{ active: canvasTextFontStyle.includes('underline') }"
+                :class="{ active: svgProperties.canvasTextFontStyle.includes('underline') }"
                 >U</label
               >
               <input
                 type="checkbox"
                 id="inputTextFontStyleUnderline"
                 value="underline"
-                x-model="canvasTextFontStyle"
+                x-model="svgProperties.canvasTextFontStyle"
               />
 
               <input
                 type="checkbox"
                 id="inputTextFontStyleStrikethrough"
                 value="line-through"
-                x-model="canvasTextFontStyle"
+                x-model="svgProperties.canvasTextFontStyle"
               />
               <label
                 for="inputTextFontStyleStrikethrough"
                 style="text-decoration: line-through"
-                :class="{ active: canvasTextFontStyle.includes('line-through') }"
+                :class="{ active: svgProperties.canvasTextFontStyle.includes('line-through') }"
                 >Strikethrough</label
               >
             </div>
@@ -165,7 +161,7 @@
             <input
               type="color"
               id="inputTextFontColor"
-              x-model="canvasTextFontColor"
+              x-model="svgProperties.canvasTextFontColor"
             />
           </div>
         </div>
@@ -173,7 +169,7 @@
         <div class="tab" x-show="activeTab === 'lines'">
           <div class="input-group">
             <label for="linesNumber"
-              >Number of lines: <span x-text="linesNumber"></span
+              >Number of lines: <span x-text="svgProperties.linesNumber"></span
             ></label>
             <input
               type="range"
@@ -181,13 +177,13 @@
               min="1"
               max="25"
               step="2"
-              x-model.number="linesNumber"
+              x-model.number="svgProperties.linesNumber"
             />
           </div>
 
           <div class="input-group-inline">
             <label for="inputLinesColor">Lines color</label>
-            <input type="color" id="inputLinesColor" x-model="linesColor" />
+            <input type="color" id="inputLinesColor" x-model="svgProperties.linesColor" />
           </div>
 
           <div class="input-group">
@@ -197,7 +193,7 @@
               id="linesHeight"
               min="1"
               max="45"
-              x-model.number="linesHeight"
+              x-model.number="svgProperties.linesHeight"
             />
           </div>
 
@@ -208,7 +204,7 @@
               id="linesSpacing"
               min="1"
               max="49"
-              x-model.number="linesSpacing"
+              x-model.number="svgProperties.linesSpacing"
             />
           </div>
 
@@ -220,7 +216,7 @@
               min="1"
               max="5"
               step="0.1"
-              x-model.number="linesWidth"
+              x-model.number="svgProperties.linesWidth"
             />
           </div>
 
@@ -231,7 +227,7 @@
               id="linesPyramidalShape"
               min="-100"
               max="100"
-              x-model.number="linesPyramidalShape"
+              x-model.number="svgProperties.linesPyramidalShape"
             />
           </div>
         </div>
@@ -239,7 +235,7 @@
         <div class="tab" x-show="activeTab === 'linesEnds'">
           <div class="input-group">
             <label for="linesEndsType">Lines ends type</label>
-            <select id="linesEndsType" x-model="linesEndsType">
+            <select id="linesEndsType" x-model="svgProperties.linesEndsType">
               <option value="none">None</option>
               <option value="arrow">Arrow</option>
               <option value="reverseArrow">Reverse arrow</option>
@@ -248,11 +244,7 @@
 
           <div class="input-group-inline">
             <label for="inputLinesEndsColor">Lines ends color</label>
-            <input
-              type="color"
-              id="inputLinesEndsColor"
-              x-model="linesEndsColor"
-            />
+            <input type="color" id="inputLinesEndsColor" x-model="svgProperties.linesEndsColor" />
           </div>
 
           <div class="input-group">
@@ -263,113 +255,13 @@
               min="1"
               max="5"
               step="0.1"
-              x-model.number="linesEndsWidth"
+              x-model.number="svgProperties.linesEndsWidth"
             />
           </div>
         </div>
       </div>
 
-      <div id="canvasContainer">
-        <svg
-          id="canvas"
-          :width="canvasWidth"
-          :height="canvasHeight"
-          :viewBox="`0 0 ${canvasWidth} ${canvasHeight}`"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <rect
-            :width="canvasWidth"
-            :height="canvasHeight"
-            :fill="canvasBackgroundColor"
-          />
-
-          <text
-            id="svgTextCenter"
-            x="50%"
-            y="50%"
-            text-anchor="middle"
-            dominant-baseline="middle"
-            font-family="'Courier New', Courier, monospace"
-            :fill="canvasTextFontColor"
-            :font-size="canvasTextFontSize"
-            :font-weight="getSvgTextFontWeight()"
-            :font-style="getSvgTextFontStyle()"
-            :text-decoration="getSvgTextTextDecoration()"
-            x-text="canvasText"
-          ></text>
-          <g id="shapes"></g>
-
-          <defs>
-            <marker
-              id="topArrowHead"
-              refX="10"
-              refY="10"
-              markerWidth="20"
-              markerHeight="20"
-              orient="0"
-              markerUnits="userSpaceOnUse"
-            >
-              <polyline
-                points="0 0, 10 10, 20 0"
-                :stroke="linesEndsColor"
-                :stroke-width="linesEndsWidth"
-                fill="none"
-              />
-            </marker>
-
-            <marker
-              id="bottomArrowHead"
-              refX="10"
-              refY="10"
-              markerWidth="20"
-              markerHeight="20"
-              orient="180"
-              markerUnits="userSpaceOnUse"
-            >
-              <polyline
-                points="0 0, 10 10, 20 0"
-                :stroke="linesEndsColor"
-                :stroke-width="linesEndsWidth"
-                fill="none"
-              />
-            </marker>
-
-            <marker
-              id="topReverseArrowHead"
-              refX="10"
-              refY="10"
-              markerWidth="20"
-              markerHeight="20"
-              orient="180"
-              markerUnits="userSpaceOnUse"
-            >
-              <polyline
-                points="0 0, 10 10, 20 0"
-                :stroke="linesEndsColor"
-                :stroke-width="linesEndsWidth"
-                fill="none"
-              />
-            </marker>
-
-            <marker
-              id="bottomReverseArrowHead"
-              refX="10"
-              refY="10"
-              markerWidth="20"
-              markerHeight="20"
-              orient="0"
-              markerUnits="userSpaceOnUse"
-            >
-              <polyline
-                points="0 0, 10 10, 20 0"
-                :stroke="linesEndsColor"
-                :stroke-width="linesEndsWidth"
-                fill="none"
-              />
-            </marker>
-          </defs>
-        </svg>
-      </div>
+      <div id="canvasContainer"></div>
     </main>
 
     <script defer src="./alpine.js"></script>
@@ -383,169 +275,249 @@
 
           // General
           deviceSelect: "640x1136",
-          canvasHeight: 1136,
-          canvasWidth: 640,
-          canvasBackgroundColor: "#ffffff",
 
-          // Text
-          canvasText: "lorem",
-          canvasTextFontColor: "#000000",
-          canvasTextFontSize: 16,
-          canvasTextFontStyle: [],
+          svgProperties: {
+            // General
+            canvasHeight: 1136,
+            canvasWidth: 640,
+            canvasBackgroundColor: "#ffffff",
 
-          // Lines
-          linesNumber: 5,
-          linesColor: "#000000",
-          linesHeight: 20,
-          linesSpacing: 20,
-          linesWidth: 2,
-          linesPyramidalShape: 0,
+            // Text
+            canvasText: "lorem",
+            canvasTextFontColor: "#000000",
+            canvasTextFontSize: 16,
+            canvasTextFontStyle: [],
 
-          // Lines ends
-          linesEndsColor: "#000000",
-          linesEndsType: "arrow",
-          linesEndsWidth: 2,
+            // Lines
+            linesNumber: 5,
+            linesColor: "#000000",
+            linesHeight: 20,
+            linesSpacing: 20,
+            linesWidth: 2,
+            linesPyramidalShape: 0,
 
-          getSvgTextFontStyle() {
-            const allowedStyles = ["italic"];
-            return this.canvasTextFontStyle
-              .filter((style) => allowedStyles.includes(style))
-              .join(" ");
-          },
-
-          getSvgTextFontWeight() {
-            const allowedStyles = ["bold"];
-            return this.canvasTextFontStyle
-              .filter((style) => allowedStyles.includes(style))
-              .join(" ");
-          },
-
-          getSvgTextTextDecoration() {
-            const allowedStyles = ["underline", "line-through"];
-            return this.canvasTextFontStyle
-              .filter((style) => allowedStyles.includes(style))
-              .join(" ");
+            // Lines ends
+            linesEndsColor: "#000000",
+            linesEndsType: "arrow",
+            linesEndsWidth: 2,
           },
 
           calculateShapeXPositionPercentage(shapeIndex) {
-            const farLeftShapeXPositionPercentage = 50 - this.linesSpacing;
-            const farRightShapeXPositionPercentage = 50 + this.linesSpacing;
+            const farLeftShapeXPositionPercentage = 50 - this.svgProperties.linesSpacing;
+            const farRightShapeXPositionPercentage = 50 + this.svgProperties.linesSpacing;
             const shapesXPositionSpan =
-              farRightShapeXPositionPercentage -
-              farLeftShapeXPositionPercentage;
+              farRightShapeXPositionPercentage - farLeftShapeXPositionPercentage;
 
             return (
               farLeftShapeXPositionPercentage +
-              (shapeIndex * shapesXPositionSpan) / (this.linesNumber - 1)
+              (shapeIndex * shapesXPositionSpan) / (this.svgProperties.linesNumber - 1)
             );
           },
 
           calculateShapeYPositionPercentage(shapeIndex) {
-            const shapeAtTheMiddleIndex = Math.floor(this.linesNumber / 2);
+            const shapeAtTheMiddleIndex = Math.floor(this.svgProperties.linesNumber / 2);
             const numberOfShapesOnEachSideOfTheMiddleShape = Math.floor(
-              this.linesNumber / 2
+              this.svgProperties.linesNumber / 2
             );
             const shapeYPositionPercentageRelativeToMiddleOne =
               100 -
               (Math.abs(shapeAtTheMiddleIndex - shapeIndex) *
-                this.linesPyramidalShape) /
+                this.svgProperties.linesPyramidalShape) /
                 numberOfShapesOnEachSideOfTheMiddleShape;
             const shapeYPositionPercentage =
-              (this.linesHeight * shapeYPositionPercentageRelativeToMiddleOne) /
-              100;
+              (this.svgProperties.linesHeight * shapeYPositionPercentageRelativeToMiddleOne) / 100;
 
             return shapeYPositionPercentage;
           },
 
-          generateShapes() {
-            const shapes = [];
+          generateSvgBackground() {
+            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            rect.setAttribute("width", this.svgProperties.canvasWidth);
+            rect.setAttribute("height", this.svgProperties.canvasHeight);
+            rect.setAttribute("fill", this.svgProperties.canvasBackgroundColor);
 
-            switch (this.linesEndsType) {
+            return rect;
+          },
+
+          generateSvgText() {
+            const textBold = this.svgProperties.canvasTextFontStyle.includes("bold") ? "bold" : "";
+            const textItalic = this.svgProperties.canvasTextFontStyle.includes("italic")
+              ? "italic"
+              : "";
+            const textUnderline = this.svgProperties.canvasTextFontStyle.includes("underline")
+              ? "underline"
+              : "";
+            const textStrikethrough = this.svgProperties.canvasTextFontStyle.includes(
+              "line-through"
+            )
+              ? "line-through"
+              : "";
+
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("id", "svgTextCenter");
+            text.setAttribute("x", "50%");
+            text.setAttribute("y", "50%");
+            text.setAttribute("text-anchor", "middle");
+            text.setAttribute("dominant-baseline", "middle");
+            text.setAttribute("font-family", "'Courier New', Courier, monospace");
+            text.setAttribute("fill", this.svgProperties.canvasTextFontColor);
+            text.setAttribute("font-size", this.svgProperties.canvasTextFontSize);
+
+            text.setAttribute("font-weight", textBold);
+            text.setAttribute("font-style", textItalic);
+            text.setAttribute("text-decoration", `${textUnderline} ${textStrikethrough}`);
+
+            text.textContent = this.svgProperties.canvasText;
+
+            return text;
+          },
+
+          generateSvg() {
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("id", "canvas");
+            svg.setAttribute("width", this.svgProperties.canvasWidth);
+            svg.setAttribute("height", this.svgProperties.canvasHeight);
+            svg.setAttribute(
+              "viewBox",
+              `0 0 ${this.svgProperties.canvasWidth} ${this.svgProperties.canvasHeight}`
+            );
+            svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+
+            svg.appendChild(this.generateSvgBackground());
+            svg.appendChild(this.generateSvgText());
+            svg.appendChild(this.generateLinesEnds());
+            svg.appendChild(this.generateLines());
+
+            document.getElementById("canvasContainer").innerHTML = "";
+            document.getElementById("canvasContainer").appendChild(svg);
+          },
+
+          generateLines() {
+            let topMarkerEnd;
+            let bottomMarkerEnd;
+
+            switch (this.svgProperties.linesEndsType) {
               case "arrow":
-                topArrowHead = "url(#topArrowHead)";
-                bottomArrowHead = "url(#bottomArrowHead)";
+                topMarkerEnd = "url(#topArrowHead)";
+                bottomMarkerEnd = "url(#bottomArrowHead)";
                 break;
               case "reverseArrow":
-                topArrowHead = "url(#topReverseArrowHead)";
-                bottomArrowHead = "url(#bottomReverseArrowHead)";
+                topMarkerEnd = "url(#topReverseArrowHead)";
+                bottomMarkerEnd = "url(#bottomReverseArrowHead)";
                 break;
               default:
-                topArrowHead = "none";
-                bottomArrowHead = "none";
+                topMarkerEnd = "none";
+                bottomMarkerEnd = "none";
             }
 
-            if (this.linesNumber === 1) {
-              shapes.push(
-                `<line x1="50%" y1="0" x2="50%" y2="${this.linesHeight}%" stroke="${this.linesColor}" stroke-width="${this.linesWidth}" marker-end="${topArrowHead}" />`
-              );
-              shapes.push(
-                `<line x1="50%" y1="100%" x2="50%" y2="${
-                  100 - this.linesHeight
-                }%" stroke="${this.linesColor}" stroke-width="${
-                  this.linesWidth
-                }" marker-end="${bottomArrowHead}" />`
-              );
+            const linesGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("stroke", this.svgProperties.linesColor);
+            line.setAttribute("stroke-width", this.svgProperties.linesWidth);
+
+            if (this.svgProperties.linesNumber === 1) {
+              const topLine = line.cloneNode(true);
+              topLine.setAttribute("x1", "50%");
+              topLine.setAttribute("y1", "0");
+              topLine.setAttribute("x2", "50%");
+              topLine.setAttribute("y2", this.svgProperties.linesHeight);
+              topLine.setAttribute("marker-end", topMarkerEnd);
+
+              const bottomLine = line.cloneNode(true);
+              bottomLine.setAttribute("x1", "50%");
+              bottomLine.setAttribute("y1", "100%");
+              bottomLine.setAttribute("x2", "50%");
+              bottomLine.setAttribute("y2", 100 - this.svgProperties.linesHeight);
+              bottomLine.setAttribute("marker-end", bottomMarkerEnd);
+
+              linesGroup.appendChild(topLine);
+              linesGroup.appendChild(bottomLine);
             } else {
-              for (let i = 0; i < this.linesNumber; i++) {
+              for (let i = 0; i < this.svgProperties.linesNumber; i++) {
                 const shapeX = this.calculateShapeXPositionPercentage(i);
                 const shapeY = this.calculateShapeYPositionPercentage(i);
 
-                shapes.push(
-                  `<line x1="${shapeX}%" y1="0" x2="${shapeX}%" y2="${shapeY}%" stroke="${this.linesColor}" stroke-width="${this.linesWidth}" marker-end="${topArrowHead}" />`
-                );
-                shapes.push(
-                  `<line x1="${shapeX}%" y1="100%" x2="${shapeX}%" y2="${
-                    100 - shapeY
-                  }%" stroke="${this.linesColor}" stroke-width="${
-                    this.linesWidth
-                  }" marker-end="${bottomArrowHead}" />`
-                );
+                const topLine = line.cloneNode(true);
+                topLine.setAttribute("x1", `${shapeX}%`);
+                topLine.setAttribute("y1", "0");
+                topLine.setAttribute("x2", `${shapeX}%`);
+                topLine.setAttribute("y2", `${shapeY}%`);
+                topLine.setAttribute("marker-end", topMarkerEnd);
+
+                const bottomLine = line.cloneNode(true);
+                bottomLine.setAttribute("x1", `${shapeX}%`);
+                bottomLine.setAttribute("y1", "100%");
+                bottomLine.setAttribute("x2", `${shapeX}%`);
+                bottomLine.setAttribute("y2", `${100 - shapeY}%`);
+                bottomLine.setAttribute("marker-end", bottomMarkerEnd);
+
+                linesGroup.appendChild(topLine);
+                linesGroup.appendChild(bottomLine);
               }
             }
 
-            document.getElementById("shapes").innerHTML = shapes.join("");
+            return linesGroup;
+          },
+
+          generateLinesEnds() {
+            const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+
+            const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+            marker.setAttribute("refX", "10");
+            marker.setAttribute("refY", "10");
+            marker.setAttribute("markerWidth", "20");
+            marker.setAttribute("markerHeight", "20");
+            marker.setAttribute("markerUnits", "userSpaceOnUse");
+
+            // Arrow head
+            const arrowHeadMarker = marker.cloneNode(true);
+            const arrowHeadPolyline = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "polyline"
+            );
+            arrowHeadPolyline.setAttribute("points", "0 0, 10 10, 20 0");
+            arrowHeadPolyline.setAttribute("stroke", this.svgProperties.linesEndsColor);
+            arrowHeadPolyline.setAttribute("stroke-width", this.svgProperties.linesEndsWidth);
+            arrowHeadPolyline.setAttribute("fill", "none");
+            arrowHeadMarker.appendChild(arrowHeadPolyline);
+
+            const topArrowHead = arrowHeadMarker.cloneNode(true);
+            topArrowHead.setAttribute("id", "topArrowHead");
+            topArrowHead.setAttribute("orient", "0");
+
+            const bottomArrowHead = arrowHeadMarker.cloneNode(true);
+            bottomArrowHead.setAttribute("id", "bottomArrowHead");
+            bottomArrowHead.setAttribute("orient", "180");
+
+            const topReverseArrowHead = arrowHeadMarker.cloneNode(true);
+            topReverseArrowHead.setAttribute("id", "topReverseArrowHead");
+            topReverseArrowHead.setAttribute("orient", "180");
+
+            const bottomReverseArrowHead = arrowHeadMarker.cloneNode(true);
+            bottomReverseArrowHead.setAttribute("id", "bottomReverseArrowHead");
+            bottomReverseArrowHead.setAttribute("orient", "0");
+
+            defs.appendChild(topArrowHead);
+            defs.appendChild(bottomArrowHead);
+            defs.appendChild(topReverseArrowHead);
+            defs.appendChild(bottomReverseArrowHead);
+
+            return defs;
           },
 
           init() {
             this.$watch("deviceSelect", (value) => {
-              [this.canvasWidth, this.canvasHeight] = value
+              [this.svgProperties.canvasWidth, this.svgProperties.canvasHeight] = value
                 .split("x")
                 .map(Number);
             });
 
-            this.$watch("linesNumber", () => {
-              this.generateShapes();
+            this.$watch("svgProperties", () => {
+              this.generateSvg();
             });
 
-            this.$watch("linesColor", () => {
-              this.generateShapes();
-            });
-
-            this.$watch("linesHeight", () => {
-              this.generateShapes();
-            });
-
-            this.$watch("linesSpacing", () => {
-              this.generateShapes();
-            });
-
-            this.$watch("linesWidth", () => {
-              this.generateShapes();
-            });
-
-            this.$watch("linesPyramidalShape", () => {
-              this.generateShapes();
-            });
-
-            this.$watch("linesEndsType", () => {
-              this.generateShapes();
-            });
-
-            this.$watch("linesEndsWidth", () => {
-              this.generateShapes();
-            });
-
-            this.generateShapes();
+            this.generateSvg();
           },
         }));
       });
