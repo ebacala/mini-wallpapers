@@ -272,6 +272,43 @@
               x-model.number="svgProperties.linesEndsSize"
             />
           </div>
+
+          <div
+            class="input-group"
+            x-show="svgProperties.linesEndsType === 'arrow' || svgProperties.linesEndsType === 'reverseArrow'"
+          >
+            <label for="linesEndsStrokeLinecap">Lines ends stroke linecap</label>
+            <select id="linesEndsStrokeLinecap" x-model="svgProperties.linesEndsStrokeLinecap">
+              <option value="butt">Butt</option>
+              <option value="round">Round</option>
+              <option value="square">Square</option>
+            </select>
+          </div>
+
+          <div
+            class="input-group"
+            x-show="svgProperties.linesEndsType === 'arrow' || svgProperties.linesEndsType === 'reverseArrow'"
+          >
+            <label for="linesEndsStrokeLinejoin">Lines ends stroke linejoin</label>
+            <select id="linesEndsStrokeLinejoin" x-model="svgProperties.linesEndsStrokeLinejoin">
+              <option value="arcs">Arcs</option>
+              <option value="miter">Miter</option>
+              <option value="miter-clip">Miter clip</option>
+              <option value="round">Round</option>
+              <option value="bevel">Bevel</option>
+            </select>
+          </div>
+
+          <div class="input-group" x-show="svgProperties.linesEndsType.includes('square')">
+            <label for="linesEndsStrokeLinecap">Square corner radius</label>
+            <input
+              type="range"
+              id="linesEndsSquareCornerRadius"
+              min="0"
+              max="10"
+              x-model.number="svgProperties.linesEndsSquareCornerRadius"
+            />
+          </div>
         </div>
       </div>
 
@@ -315,6 +352,9 @@
             linesEndsType: "arrow",
             linesEndsWidth: 2,
             linesEndsSize: 1,
+            linesEndsStrokeLinecap: "butt",
+            linesEndsStrokeLinejoin: "miter",
+            linesEndsSquareCornerRadius: 0,
           },
 
           calculateShapeXPositionPercentage(shapeIndex) {
@@ -507,8 +547,14 @@
               this.svgProperties.linesEndsWidth / this.svgProperties.linesEndsSize
             );
             arrowHeadPolyline.setAttribute("fill", "none");
-            arrowHeadPolyline.setAttribute("stroke-linejoin", "round");
-            arrowHeadPolyline.setAttribute("stroke-linecap", "round");
+            arrowHeadPolyline.setAttribute(
+              "stroke-linejoin",
+              this.svgProperties.linesEndsStrokeLinejoin
+            );
+            arrowHeadPolyline.setAttribute(
+              "stroke-linecap",
+              this.svgProperties.linesEndsStrokeLinecap
+            );
             arrowHeadMarker.appendChild(arrowHeadPolyline);
 
             const topArrowHead = arrowHeadMarker.cloneNode(true);
@@ -532,17 +578,17 @@
             circleMarker.setAttribute("id", "circle");
             circleMarker.setAttribute("refX", "10");
             circleMarker.setAttribute("refY", "6");
-            const circlePolyline = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            circlePolyline.setAttribute("cx", "10");
-            circlePolyline.setAttribute("cy", "12");
-            circlePolyline.setAttribute("r", "6");
-            circlePolyline.setAttribute("stroke", this.svgProperties.linesEndsColor);
-            circlePolyline.setAttribute(
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("cx", "10");
+            circle.setAttribute("cy", "12");
+            circle.setAttribute("r", "6");
+            circle.setAttribute("stroke", this.svgProperties.linesEndsColor);
+            circle.setAttribute(
               "stroke-width",
               this.svgProperties.linesEndsWidth / this.svgProperties.linesEndsSize
             );
-            circlePolyline.setAttribute("fill", "none");
-            circleMarker.appendChild(circlePolyline);
+            circle.setAttribute("fill", "none");
+            circleMarker.appendChild(circle);
 
             const topCircle = circleMarker.cloneNode(true);
             topCircle.setAttribute("id", "topCircle");
@@ -557,18 +603,20 @@
             squareMarker.setAttribute("id", "square");
             squareMarker.setAttribute("refX", "10");
             squareMarker.setAttribute("refY", "2");
-            const squarePolyline = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-            squarePolyline.setAttribute("x", "2");
-            squarePolyline.setAttribute("y", "2");
-            squarePolyline.setAttribute("width", "16");
-            squarePolyline.setAttribute("height", "16");
-            squarePolyline.setAttribute("stroke", this.svgProperties.linesEndsColor);
-            squarePolyline.setAttribute(
+            const square = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            square.setAttribute("x", "2");
+            square.setAttribute("y", "2");
+            square.setAttribute("rx", this.svgProperties.linesEndsSquareCornerRadius);
+            square.setAttribute("ry", this.svgProperties.linesEndsSquareCornerRadius);
+            square.setAttribute("width", "16");
+            square.setAttribute("height", "16");
+            square.setAttribute("stroke", this.svgProperties.linesEndsColor);
+            square.setAttribute(
               "stroke-width",
               this.svgProperties.linesEndsWidth / this.svgProperties.linesEndsSize
             );
-            squarePolyline.setAttribute("fill", "none");
-            squareMarker.appendChild(squarePolyline);
+            square.setAttribute("fill", "none");
+            squareMarker.appendChild(square);
 
             const topSquare = squareMarker.cloneNode(true);
             topSquare.setAttribute("id", "topSquare");
