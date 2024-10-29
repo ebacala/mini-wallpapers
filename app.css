@@ -269,7 +269,8 @@ input[type="text"] {
 
 #inputBackgroundColor,
 #inputTextFontColor,
-#linesEndsColor,
+#inputLinesEndsColor,
+#inputLinesColor,
 #svgArrowsColor {
   flex: 1;
 }
