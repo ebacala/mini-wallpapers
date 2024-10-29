@@ -50,7 +50,7 @@
 
         <div class="tab" x-show="activeTab === 'general'">
           <div id="deviceSelectContainer" class="input-group">
-            <label for="deviceSelect">Select device</label>
+            <label for="deviceSelect">Device size</label>
             <select id="deviceSelect" x-model="deviceSelect">
               <option value="640x1136">iPhone 4/5 (640x1136)</option>
               <option value="750x1334">iPhone 6/7/8 (750x1334)</option>
@@ -103,7 +103,7 @@
             />
           </div>
 
-          <div id="fontStyleContainer" class="input-group">
+          <div class="input-group-inline">
             <span>Font style</span>
             <div id="fontStyleOptions">
               <label
@@ -145,28 +145,28 @@
                 x-model="canvasTextFontStyle"
               />
 
-              <label
-                for="inputTextFontStyleStrikethrough"
-                style="text-decoration: line-through"
-                :class="{ active: canvasTextFontStyle.includes('line-through') }"
-                >Strikethrough</label
-              >
               <input
                 type="checkbox"
                 id="inputTextFontStyleStrikethrough"
                 value="line-through"
                 x-model="canvasTextFontStyle"
               />
+              <label
+                for="inputTextFontStyleStrikethrough"
+                style="text-decoration: line-through"
+                :class="{ active: canvasTextFontStyle.includes('line-through') }"
+                >Strikethrough</label
+              >
             </div>
+          </div>
 
-            <div class="input-group-inline">
-              <label for="inputTextFontColor">Font color</label>
-              <input
-                type="color"
-                id="inputTextFontColor"
-                x-model="canvasTextFontColor"
-              />
-            </div>
+          <div class="input-group-inline">
+            <label for="inputTextFontColor">Font color</label>
+            <input
+              type="color"
+              id="inputTextFontColor"
+              x-model="canvasTextFontColor"
+            />
           </div>
         </div>
 
@@ -519,10 +519,6 @@
             });
 
             this.$watch("linesEndsWidth", () => {
-              this.generateShapes();
-            });
-
-            this.$watch("linesEndsSize", () => {
               this.generateShapes();
             });
 
