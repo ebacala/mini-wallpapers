@@ -239,6 +239,7 @@
               <option value="none">None</option>
               <option value="arrow">Arrow</option>
               <option value="reverseArrow">Reverse arrow</option>
+              <option value="circle">Circle</option>
             </select>
           </div>
 
@@ -418,6 +419,10 @@
                 topMarkerEnd = "url(#topReverseArrowHead)";
                 bottomMarkerEnd = "url(#bottomReverseArrowHead)";
                 break;
+              case "circle":
+                topMarkerEnd = "url(#topCircle)";
+                bottomMarkerEnd = "url(#bottomCircle)";
+                break;
               default:
                 topMarkerEnd = "none";
                 bottomMarkerEnd = "none";
@@ -492,7 +497,10 @@
             );
             arrowHeadPolyline.setAttribute("points", "5 5, 10 10, 15 5");
             arrowHeadPolyline.setAttribute("stroke", this.svgProperties.linesEndsColor);
-            arrowHeadPolyline.setAttribute("stroke-width", this.svgProperties.linesEndsWidth / this.svgProperties.linesEndsSize);
+            arrowHeadPolyline.setAttribute(
+              "stroke-width",
+              this.svgProperties.linesEndsWidth / this.svgProperties.linesEndsSize
+            );
             arrowHeadPolyline.setAttribute("fill", "none");
             arrowHeadPolyline.setAttribute("stroke-linejoin", "round");
             arrowHeadPolyline.setAttribute("stroke-linecap", "round");
@@ -514,10 +522,37 @@
             bottomReverseArrowHead.setAttribute("id", "bottomReverseArrowHead");
             bottomReverseArrowHead.setAttribute("orient", "0");
 
+            // Circle
+            const circleMarker = marker.cloneNode(true);
+            circleMarker.setAttribute("id", "circle");
+            circleMarker.setAttribute("refX", "10");
+            circleMarker.setAttribute("refY", "6");
+            const circlePolyline = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circlePolyline.setAttribute("cx", "10");
+            circlePolyline.setAttribute("cy", "12");
+            circlePolyline.setAttribute("r", "6");
+            circlePolyline.setAttribute("stroke", this.svgProperties.linesEndsColor);
+            circlePolyline.setAttribute(
+              "stroke-width",
+              this.svgProperties.linesEndsWidth / this.svgProperties.linesEndsSize
+            );
+            circlePolyline.setAttribute("fill", "none");
+            circleMarker.appendChild(circlePolyline);
+
+            const topCircle = circleMarker.cloneNode(true);
+            topCircle.setAttribute("id", "topCircle");
+            topCircle.setAttribute("orient", "0");
+
+            const bottomCircle = circleMarker.cloneNode(true);
+            bottomCircle.setAttribute("id", "bottomCircle");
+            bottomCircle.setAttribute("orient", "180");
+
             defs.appendChild(topArrowHead);
             defs.appendChild(bottomArrowHead);
             defs.appendChild(topReverseArrowHead);
             defs.appendChild(bottomReverseArrowHead);
+            defs.appendChild(topCircle);
+            defs.appendChild(bottomCircle);
 
             return defs;
           },
