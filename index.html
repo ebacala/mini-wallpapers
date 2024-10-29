@@ -240,6 +240,7 @@
               <option value="arrow">Arrow</option>
               <option value="reverseArrow">Reverse arrow</option>
               <option value="circle">Circle</option>
+              <option value="square">Square</option>
             </select>
           </div>
 
@@ -423,6 +424,10 @@
                 topMarkerEnd = "url(#topCircle)";
                 bottomMarkerEnd = "url(#bottomCircle)";
                 break;
+              case "square":
+                topMarkerEnd = "url(#topSquare)";
+                bottomMarkerEnd = "url(#bottomSquare)";
+                break;
               default:
                 topMarkerEnd = "none";
                 bottomMarkerEnd = "none";
@@ -547,12 +552,40 @@
             bottomCircle.setAttribute("id", "bottomCircle");
             bottomCircle.setAttribute("orient", "180");
 
+            // Square
+            const squareMarker = marker.cloneNode(true);
+            squareMarker.setAttribute("id", "square");
+            squareMarker.setAttribute("refX", "10");
+            squareMarker.setAttribute("refY", "2");
+            const squarePolyline = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            squarePolyline.setAttribute("x", "2");
+            squarePolyline.setAttribute("y", "2");
+            squarePolyline.setAttribute("width", "16");
+            squarePolyline.setAttribute("height", "16");
+            squarePolyline.setAttribute("stroke", this.svgProperties.linesEndsColor);
+            squarePolyline.setAttribute(
+              "stroke-width",
+              this.svgProperties.linesEndsWidth / this.svgProperties.linesEndsSize
+            );
+            squarePolyline.setAttribute("fill", "none");
+            squareMarker.appendChild(squarePolyline);
+
+            const topSquare = squareMarker.cloneNode(true);
+            topSquare.setAttribute("id", "topSquare");
+            topSquare.setAttribute("orient", "0");
+
+            const bottomSquare = squareMarker.cloneNode(true);
+            bottomSquare.setAttribute("id", "bottomSquare");
+            bottomSquare.setAttribute("orient", "180");
+
             defs.appendChild(topArrowHead);
             defs.appendChild(bottomArrowHead);
             defs.appendChild(topReverseArrowHead);
             defs.appendChild(bottomReverseArrowHead);
             defs.appendChild(topCircle);
             defs.appendChild(bottomCircle);
+            defs.appendChild(topSquare);
+            defs.appendChild(bottomSquare);
 
             return defs;
           },
