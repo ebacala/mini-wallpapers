@@ -53,6 +53,7 @@
             <div id="deviceSelectContainer" class="input-group">
               <label for="deviceSelect">Device size</label>
               <select id="deviceSelect" x-model="deviceSelect">
+                <option value="custom">Custom</option>
                 <option value="640x1136">iPhone 4/5 (640x1136)</option>
                 <option value="750x1334">iPhone 6/7/8 (750x1334)</option>
                 <option value="1080x1920">iPhone 6/7/8 Plus (1080x1920)</option>
@@ -65,6 +66,16 @@
                 <option value="3024x1964">MacBook Pro 14" (3024x1964)</option>
                 <option value="3456x2234">MacBook Pro 16" (3456x2234)</option>
               </select>
+            </div>
+
+            <div class="input-group" x-show="deviceSelect === 'custom'">
+              <label for="customWidth">Width</label>
+              <input type="text" id="customWidth" inputmode="numeric" x-model.number="svgProperties.canvasWidth" /> 
+            </div>
+
+            <div class="input-group" x-show="deviceSelect === 'custom'">
+              <label for="customHeight">Height</label>
+              <input type="text" id="customHeight" inputmode="numeric" x-model.number="svgProperties.canvasHeight" />
             </div>
 
             <div class="input-group-inline">
@@ -646,6 +657,10 @@
 
           init() {
             this.$watch("deviceSelect", (value) => {
+              if (value === "custom") {
+                return;
+              }
+
               [this.svgProperties.canvasWidth, this.svgProperties.canvasHeight] = value
                 .split("x")
                 .map(Number);
