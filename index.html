@@ -70,12 +70,22 @@
 
             <div class="input-group" x-show="deviceSelect === 'custom'">
               <label for="customWidth">Width</label>
-              <input type="text" id="customWidth" inputmode="numeric" x-model.number="svgProperties.canvasWidth" /> 
+              <input
+                type="text"
+                id="customWidth"
+                inputmode="numeric"
+                x-model.number="svgProperties.canvasWidth"
+              />
             </div>
 
             <div class="input-group" x-show="deviceSelect === 'custom'">
               <label for="customHeight">Height</label>
-              <input type="text" id="customHeight" inputmode="numeric" x-model.number="svgProperties.canvasHeight" />
+              <input
+                type="text"
+                id="customHeight"
+                inputmode="numeric"
+                x-model.number="svgProperties.canvasHeight"
+              />
             </div>
 
             <div class="input-group-inline">
@@ -117,52 +127,48 @@
                 <label
                   for="inputTextFontStyleBold"
                   style="font-weight: bold"
-                  :class="{ active: svgProperties.canvasTextFontStyle.includes('bold') }"
+                  :class="{ active: svgProperties.canvasTextFontIsBold }"
                   >B</label
                 >
                 <input
                   type="checkbox"
                   id="inputTextFontStyleBold"
-                  value="bold"
-                  x-model="svgProperties.canvasTextFontStyle"
+                  x-model.boolean="svgProperties.canvasTextFontIsBold"
                 />
 
                 <label
                   for="inputTextFontStyleItalic"
                   style="font-style: italic"
-                  :class="{ active: svgProperties.canvasTextFontStyle.includes('italic') }"
+                  :class="{ active: svgProperties.canvasTextFontIsItalic }"
                   >I</label
                 >
                 <input
                   type="checkbox"
                   id="inputTextFontStyleItalic"
-                  value="italic"
-                  x-model="svgProperties.canvasTextFontStyle"
+                  x-model.boolean="svgProperties.canvasTextFontIsItalic"
                 />
 
                 <label
                   for="inputTextFontStyleUnderline"
                   style="text-decoration: underline"
-                  :class="{ active: svgProperties.canvasTextFontStyle.includes('underline') }"
+                  :class="{ active: svgProperties.canvasTextFontIsUnderline }"
                   >U</label
                 >
                 <input
                   type="checkbox"
                   id="inputTextFontStyleUnderline"
-                  value="underline"
-                  x-model="svgProperties.canvasTextFontStyle"
+                  x-model.boolean="svgProperties.canvasTextFontIsUnderline"
                 />
 
                 <input
                   type="checkbox"
                   id="inputTextFontStyleStrikethrough"
-                  value="line-through"
-                  x-model="svgProperties.canvasTextFontStyle"
+                  x-model.boolean="svgProperties.canvasTextFontIsStrikethrough"
                 />
                 <label
                   for="inputTextFontStyleStrikethrough"
                   style="text-decoration: line-through"
-                  :class="{ active: svgProperties.canvasTextFontStyle.includes('line-through') }"
+                  :class="{ active: svgProperties.canvasTextFontIsStrikethrough }"
                   >Strikethrough</label
                 >
               </div>
@@ -354,7 +360,10 @@
             canvasText: "lorem",
             canvasTextFontColor: "#000000",
             canvasTextFontSize: 16,
-            canvasTextFontStyle: [],
+            canvasTextFontIsBold: false,
+            canvasTextFontIsItalic: false,
+            canvasTextFontIsUnderline: false,
+            canvasTextFontIsStrikethrough: false,
 
             // Lines
             linesNumber: 5,
@@ -412,19 +421,6 @@
           },
 
           generateSvgText() {
-            const textBold = this.svgProperties.canvasTextFontStyle.includes("bold") ? "bold" : "";
-            const textItalic = this.svgProperties.canvasTextFontStyle.includes("italic")
-              ? "italic"
-              : "";
-            const textUnderline = this.svgProperties.canvasTextFontStyle.includes("underline")
-              ? "underline"
-              : "";
-            const textStrikethrough = this.svgProperties.canvasTextFontStyle.includes(
-              "line-through"
-            )
-              ? "line-through"
-              : "";
-
             const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
             text.setAttribute("id", "svgTextCenter");
             text.setAttribute("x", "50%");
@@ -435,9 +431,18 @@
             text.setAttribute("fill", this.svgProperties.canvasTextFontColor);
             text.setAttribute("font-size", this.svgProperties.canvasTextFontSize);
 
-            text.setAttribute("font-weight", textBold);
-            text.setAttribute("font-style", textItalic);
-            text.setAttribute("text-decoration", `${textUnderline} ${textStrikethrough}`);
+            if (this.svgProperties.canvasTextFontIsBold) {
+              text.setAttribute("font-weight", "bold");
+            }
+            if (this.svgProperties.canvasTextFontIsItalic) {
+              text.setAttribute("font-style", "italic");
+            }
+            if (this.svgProperties.canvasTextFontIsUnderline) {
+              text.setAttribute("text-decoration", "underline");
+            }
+            if (this.svgProperties.canvasTextFontIsStrikethrough) {
+              text.setAttribute("text-decoration", "line-through");
+            }
 
             text.textContent = this.svgProperties.canvasText;
 
@@ -655,7 +660,54 @@
             return defs;
           },
 
+          debouncedUpdateUrl() {
+            if (this.urlUpdateTimeout) {
+              clearTimeout(this.urlUpdateTimeout);
+            }
+            this.urlUpdateTimeout = setTimeout(() => {
+              const params = new URLSearchParams(this.svgProperties).toString();
+              window.history.pushState({}, "", `?${params}`);
+            }, 500);
+          },
+
+          refreshSvgPropertiesTypes() {
+            const typeMapping = {
+              // Number properties
+              canvasWidth: Number,
+              canvasHeight: Number,
+              canvasTextFontSize: Number,
+              linesNumber: Number,
+              linesHeight: Number,
+              linesSpacing: Number,
+              linesWidth: Number,
+              linesPyramidalShape: Number,
+              linesEndsWidth: Number,
+              linesEndsSize: Number,
+              linesEndsSquareCornerRadius: Number,
+              
+              // Boolean properties
+              canvasTextFontIsBold: (val) => JSON.parse(val),
+              canvasTextFontIsItalic: (val) => JSON.parse(val),
+              canvasTextFontIsUnderline: (val) => JSON.parse(val),
+              canvasTextFontIsStrikethrough: (val) => JSON.parse(val),
+            };
+
+            Object.entries(typeMapping).forEach(([key, typeFn]) => {
+              if (key in this.svgProperties) {
+                this.svgProperties[key] = typeFn(this.svgProperties[key]);
+              }
+            });
+          },
+
           init() {
+            const params = new URLSearchParams(window.location.search);
+
+            if (params.size > 0) {
+              const paramEntries = Object.fromEntries(params);
+              this.svgProperties = paramEntries;
+              this.refreshSvgPropertiesTypes();
+            }
+
             this.$watch("deviceSelect", (value) => {
               if (value === "custom") {
                 return;
@@ -667,6 +719,8 @@
             });
 
             this.$watch("svgProperties", () => {
+              this.debouncedUpdateUrl();
+
               this.generateSvg();
             });
 
