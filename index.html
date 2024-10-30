@@ -14,301 +14,307 @@
     </header>
 
     <main x-data="miniWallpapers">
-      <div id="controlsContainer">
-        <div id="tabsContainer">
-          <button
-            @click="activeTab = 'general'"
-            class="tab-button"
-            :class="{ active: activeTab === 'general' }"
-          >
-            General
-          </button>
-          <button
-            @click="activeTab = 'text'"
-            class="tab-button"
-            :class="{ active: activeTab === 'text' }"
-          >
-            Text
-          </button>
-          <button
-            @click="activeTab = 'lines'"
-            class="tab-button"
-            :class="{ active: activeTab === 'lines' }"
-          >
-            Lines
-          </button>
-          <button
-            @click="activeTab = 'linesEnds'"
-            class="tab-button"
-            :class="{ active: activeTab === 'linesEnds' }"
-          >
-            Lines ends
-          </button>
-        </div>
-
-        <hr />
-
-        <div class="tab" x-show="activeTab === 'general'">
-          <div id="deviceSelectContainer" class="input-group">
-            <label for="deviceSelect">Device size</label>
-            <select id="deviceSelect" x-model="deviceSelect">
-              <option value="640x1136">iPhone 4/5 (640x1136)</option>
-              <option value="750x1334">iPhone 6/7/8 (750x1334)</option>
-              <option value="1080x1920">iPhone 6/7/8 Plus (1080x1920)</option>
-              <option value="1125x2436">iPhone X/XS/11 Pro (1125x2436)</option>
-              <option value="1242x2688">iPhone XS Max/11 Pro Max (1242x2688)</option>
-              <option value="1170x2532">iPhone 12/13/14 (1170x2532)</option>
-              <option value="1284x2778">iPhone 12/13/14 Pro Max (1284x2778)</option>
-              <option value="1290x2796">iPhone 15 Pro Max (1290x2796)</option>
-              <option value="2560x1600">MacBook Air 13" (2560x1600)</option>
-              <option value="3024x1964">MacBook Pro 14" (3024x1964)</option>
-              <option value="3456x2234">MacBook Pro 16" (3456x2234)</option>
-            </select>
+      <div id="controlsColumn">
+        <div id="controlsContainer">
+          <div id="tabsContainer">
+            <button
+              @click="activeTab = 'general'"
+              class="tab-button"
+              :class="{ active: activeTab === 'general' }"
+            >
+              General
+            </button>
+            <button
+              @click="activeTab = 'text'"
+              class="tab-button"
+              :class="{ active: activeTab === 'text' }"
+            >
+              Text
+            </button>
+            <button
+              @click="activeTab = 'lines'"
+              class="tab-button"
+              :class="{ active: activeTab === 'lines' }"
+            >
+              Lines
+            </button>
+            <button
+              @click="activeTab = 'linesEnds'"
+              class="tab-button"
+              :class="{ active: activeTab === 'linesEnds' }"
+            >
+              Lines ends
+            </button>
           </div>
 
-          <div class="input-group-inline">
-            <label for="inputBackgroundColor">Background color</label>
-            <input
-              type="color"
-              id="inputBackgroundColor"
-              x-model="svgProperties.canvasBackgroundColor"
-            />
-          </div>
-        </div>
+          <hr />
 
-        <div class="tab" x-show="activeTab === 'text'">
-          <div class="input-group">
-            <label for="inputText">Text content</label>
-            <input
-              type="text"
-              id="inputText"
-              placeholder="Enter text here"
-              x-model="svgProperties.canvasText"
-            />
-          </div>
+          <div class="tab" x-show="activeTab === 'general'">
+            <div id="deviceSelectContainer" class="input-group">
+              <label for="deviceSelect">Device size</label>
+              <select id="deviceSelect" x-model="deviceSelect">
+                <option value="640x1136">iPhone 4/5 (640x1136)</option>
+                <option value="750x1334">iPhone 6/7/8 (750x1334)</option>
+                <option value="1080x1920">iPhone 6/7/8 Plus (1080x1920)</option>
+                <option value="1125x2436">iPhone X/XS/11 Pro (1125x2436)</option>
+                <option value="1242x2688">iPhone XS Max/11 Pro Max (1242x2688)</option>
+                <option value="1170x2532">iPhone 12/13/14 (1170x2532)</option>
+                <option value="1284x2778">iPhone 12/13/14 Pro Max (1284x2778)</option>
+                <option value="1290x2796">iPhone 15 Pro Max (1290x2796)</option>
+                <option value="2560x1600">MacBook Air 13" (2560x1600)</option>
+                <option value="3024x1964">MacBook Pro 14" (3024x1964)</option>
+                <option value="3456x2234">MacBook Pro 16" (3456x2234)</option>
+              </select>
+            </div>
 
-          <div class="input-group">
-            <label for="inputTextFontSize">Text font size</label>
-            <input
-              type="range"
-              id="inputTextFontSize"
-              min="10"
-              max="100"
-              step="1"
-              x-model.number="svgProperties.canvasTextFontSize"
-            />
-          </div>
-
-          <div class="input-group-inline">
-            <span>Font style</span>
-            <div id="fontStyleOptions">
-              <label
-                for="inputTextFontStyleBold"
-                style="font-weight: bold"
-                :class="{ active: svgProperties.canvasTextFontStyle.includes('bold') }"
-                >B</label
-              >
+            <div class="input-group-inline">
+              <label for="inputBackgroundColor">Background color</label>
               <input
-                type="checkbox"
-                id="inputTextFontStyleBold"
-                value="bold"
-                x-model="svgProperties.canvasTextFontStyle"
+                type="color"
+                id="inputBackgroundColor"
+                x-model="svgProperties.canvasBackgroundColor"
               />
-
-              <label
-                for="inputTextFontStyleItalic"
-                style="font-style: italic"
-                :class="{ active: svgProperties.canvasTextFontStyle.includes('italic') }"
-                >I</label
-              >
-              <input
-                type="checkbox"
-                id="inputTextFontStyleItalic"
-                value="italic"
-                x-model="svgProperties.canvasTextFontStyle"
-              />
-
-              <label
-                for="inputTextFontStyleUnderline"
-                style="text-decoration: underline"
-                :class="{ active: svgProperties.canvasTextFontStyle.includes('underline') }"
-                >U</label
-              >
-              <input
-                type="checkbox"
-                id="inputTextFontStyleUnderline"
-                value="underline"
-                x-model="svgProperties.canvasTextFontStyle"
-              />
-
-              <input
-                type="checkbox"
-                id="inputTextFontStyleStrikethrough"
-                value="line-through"
-                x-model="svgProperties.canvasTextFontStyle"
-              />
-              <label
-                for="inputTextFontStyleStrikethrough"
-                style="text-decoration: line-through"
-                :class="{ active: svgProperties.canvasTextFontStyle.includes('line-through') }"
-                >Strikethrough</label
-              >
             </div>
           </div>
 
-          <div class="input-group-inline">
-            <label for="inputTextFontColor">Font color</label>
-            <input
-              type="color"
-              id="inputTextFontColor"
-              x-model="svgProperties.canvasTextFontColor"
-            />
+          <div class="tab" x-show="activeTab === 'text'">
+            <div class="input-group">
+              <label for="inputText">Text content</label>
+              <input
+                type="text"
+                id="inputText"
+                placeholder="Enter text here"
+                x-model="svgProperties.canvasText"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="inputTextFontSize">Text font size</label>
+              <input
+                type="range"
+                id="inputTextFontSize"
+                min="10"
+                max="100"
+                step="1"
+                x-model.number="svgProperties.canvasTextFontSize"
+              />
+            </div>
+
+            <div class="input-group-inline">
+              <span>Font style</span>
+              <div id="fontStyleOptions">
+                <label
+                  for="inputTextFontStyleBold"
+                  style="font-weight: bold"
+                  :class="{ active: svgProperties.canvasTextFontStyle.includes('bold') }"
+                  >B</label
+                >
+                <input
+                  type="checkbox"
+                  id="inputTextFontStyleBold"
+                  value="bold"
+                  x-model="svgProperties.canvasTextFontStyle"
+                />
+
+                <label
+                  for="inputTextFontStyleItalic"
+                  style="font-style: italic"
+                  :class="{ active: svgProperties.canvasTextFontStyle.includes('italic') }"
+                  >I</label
+                >
+                <input
+                  type="checkbox"
+                  id="inputTextFontStyleItalic"
+                  value="italic"
+                  x-model="svgProperties.canvasTextFontStyle"
+                />
+
+                <label
+                  for="inputTextFontStyleUnderline"
+                  style="text-decoration: underline"
+                  :class="{ active: svgProperties.canvasTextFontStyle.includes('underline') }"
+                  >U</label
+                >
+                <input
+                  type="checkbox"
+                  id="inputTextFontStyleUnderline"
+                  value="underline"
+                  x-model="svgProperties.canvasTextFontStyle"
+                />
+
+                <input
+                  type="checkbox"
+                  id="inputTextFontStyleStrikethrough"
+                  value="line-through"
+                  x-model="svgProperties.canvasTextFontStyle"
+                />
+                <label
+                  for="inputTextFontStyleStrikethrough"
+                  style="text-decoration: line-through"
+                  :class="{ active: svgProperties.canvasTextFontStyle.includes('line-through') }"
+                  >Strikethrough</label
+                >
+              </div>
+            </div>
+
+            <div class="input-group-inline">
+              <label for="inputTextFontColor">Font color</label>
+              <input
+                type="color"
+                id="inputTextFontColor"
+                x-model="svgProperties.canvasTextFontColor"
+              />
+            </div>
+          </div>
+
+          <div class="tab" x-show="activeTab === 'lines'">
+            <div class="input-group">
+              <label for="linesNumber"
+                >Number of lines: <span x-text="svgProperties.linesNumber"></span
+              ></label>
+              <input
+                type="range"
+                id="linesNumber"
+                min="1"
+                max="35"
+                step="2"
+                x-model.number="svgProperties.linesNumber"
+              />
+            </div>
+
+            <div class="input-group-inline">
+              <label for="inputLinesColor">Lines color</label>
+              <input type="color" id="inputLinesColor" x-model="svgProperties.linesColor" />
+            </div>
+
+            <div class="input-group">
+              <label for="linesHeight">Lines height</label>
+              <input
+                type="range"
+                id="linesHeight"
+                min="1"
+                max="45"
+                x-model.number="svgProperties.linesHeight"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="linesSpacing">Lines spacing</label>
+              <input
+                type="range"
+                id="linesSpacing"
+                min="1"
+                max="49"
+                x-model.number="svgProperties.linesSpacing"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="linesWidth">Lines width</label>
+              <input
+                type="range"
+                id="linesWidth"
+                min="1"
+                max="10"
+                step="0.1"
+                x-model.number="svgProperties.linesWidth"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="linesPyramidalShape">Pyramidal shape</label>
+              <input
+                type="range"
+                id="linesPyramidalShape"
+                min="-100"
+                max="100"
+                x-model.number="svgProperties.linesPyramidalShape"
+              />
+            </div>
+          </div>
+
+          <div class="tab" x-show="activeTab === 'linesEnds'">
+            <div class="input-group">
+              <label for="linesEndsType">Lines ends type</label>
+              <select id="linesEndsType" x-model="svgProperties.linesEndsType">
+                <option value="none">None</option>
+                <option value="arrow">Arrow</option>
+                <option value="reverseArrow">Reverse arrow</option>
+                <option value="circle">Circle</option>
+                <option value="square">Square</option>
+              </select>
+            </div>
+
+            <div class="input-group-inline">
+              <label for="inputLinesEndsColor">Lines ends color</label>
+              <input type="color" id="inputLinesEndsColor" x-model="svgProperties.linesEndsColor" />
+            </div>
+
+            <div class="input-group">
+              <label for="linesEndsWidth">Lines ends width</label>
+              <input
+                type="range"
+                id="linesEndsWidth"
+                min="1"
+                max="10"
+                step="0.1"
+                x-model.number="svgProperties.linesEndsWidth"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="linesEndsSize">Lines ends size</label>
+              <input
+                type="range"
+                id="linesEndsSize"
+                min="0.1"
+                max="3"
+                step="0.1"
+                x-model.number="svgProperties.linesEndsSize"
+              />
+            </div>
+
+            <div
+              class="input-group"
+              x-show="svgProperties.linesEndsType === 'arrow' || svgProperties.linesEndsType === 'reverseArrow'"
+            >
+              <label for="linesEndsStrokeLinecap">Lines ends stroke linecap</label>
+              <select id="linesEndsStrokeLinecap" x-model="svgProperties.linesEndsStrokeLinecap">
+                <option value="butt">Butt</option>
+                <option value="round">Round</option>
+                <option value="square">Square</option>
+              </select>
+            </div>
+
+            <div
+              class="input-group"
+              x-show="svgProperties.linesEndsType === 'arrow' || svgProperties.linesEndsType === 'reverseArrow'"
+            >
+              <label for="linesEndsStrokeLinejoin">Lines ends stroke linejoin</label>
+              <select id="linesEndsStrokeLinejoin" x-model="svgProperties.linesEndsStrokeLinejoin">
+                <option value="arcs">Arcs</option>
+                <option value="miter">Miter</option>
+                <option value="miter-clip">Miter clip</option>
+                <option value="round">Round</option>
+                <option value="bevel">Bevel</option>
+              </select>
+            </div>
+
+            <div class="input-group" x-show="svgProperties.linesEndsType.includes('square')">
+              <label for="linesEndsStrokeLinecap">Square corner radius</label>
+              <input
+                type="range"
+                id="linesEndsSquareCornerRadius"
+                min="0"
+                max="10"
+                x-model.number="svgProperties.linesEndsSquareCornerRadius"
+              />
+            </div>
           </div>
         </div>
 
-        <div class="tab" x-show="activeTab === 'lines'">
-          <div class="input-group">
-            <label for="linesNumber"
-              >Number of lines: <span x-text="svgProperties.linesNumber"></span
-            ></label>
-            <input
-              type="range"
-              id="linesNumber"
-              min="1"
-              max="35"
-              step="2"
-              x-model.number="svgProperties.linesNumber"
-            />
-          </div>
-
-          <div class="input-group-inline">
-            <label for="inputLinesColor">Lines color</label>
-            <input type="color" id="inputLinesColor" x-model="svgProperties.linesColor" />
-          </div>
-
-          <div class="input-group">
-            <label for="linesHeight">Lines height</label>
-            <input
-              type="range"
-              id="linesHeight"
-              min="1"
-              max="45"
-              x-model.number="svgProperties.linesHeight"
-            />
-          </div>
-
-          <div class="input-group">
-            <label for="linesSpacing">Lines spacing</label>
-            <input
-              type="range"
-              id="linesSpacing"
-              min="1"
-              max="49"
-              x-model.number="svgProperties.linesSpacing"
-            />
-          </div>
-
-          <div class="input-group">
-            <label for="linesWidth">Lines width</label>
-            <input
-              type="range"
-              id="linesWidth"
-              min="1"
-              max="10"
-              step="0.1"
-              x-model.number="svgProperties.linesWidth"
-            />
-          </div>
-
-          <div class="input-group">
-            <label for="linesPyramidalShape">Pyramidal shape</label>
-            <input
-              type="range"
-              id="linesPyramidalShape"
-              min="-100"
-              max="100"
-              x-model.number="svgProperties.linesPyramidalShape"
-            />
-          </div>
-        </div>
-
-        <div class="tab" x-show="activeTab === 'linesEnds'">
-          <div class="input-group">
-            <label for="linesEndsType">Lines ends type</label>
-            <select id="linesEndsType" x-model="svgProperties.linesEndsType">
-              <option value="none">None</option>
-              <option value="arrow">Arrow</option>
-              <option value="reverseArrow">Reverse arrow</option>
-              <option value="circle">Circle</option>
-              <option value="square">Square</option>
-            </select>
-          </div>
-
-          <div class="input-group-inline">
-            <label for="inputLinesEndsColor">Lines ends color</label>
-            <input type="color" id="inputLinesEndsColor" x-model="svgProperties.linesEndsColor" />
-          </div>
-
-          <div class="input-group">
-            <label for="linesEndsWidth">Lines ends width</label>
-            <input
-              type="range"
-              id="linesEndsWidth"
-              min="1"
-              max="10"
-              step="0.1"
-              x-model.number="svgProperties.linesEndsWidth"
-            />
-          </div>
-
-          <div class="input-group">
-            <label for="linesEndsSize">Lines ends size</label>
-            <input
-              type="range"
-              id="linesEndsSize"
-              min="0.1"
-              max="3"
-              step="0.1"
-              x-model.number="svgProperties.linesEndsSize"
-            />
-          </div>
-
-          <div
-            class="input-group"
-            x-show="svgProperties.linesEndsType === 'arrow' || svgProperties.linesEndsType === 'reverseArrow'"
-          >
-            <label for="linesEndsStrokeLinecap">Lines ends stroke linecap</label>
-            <select id="linesEndsStrokeLinecap" x-model="svgProperties.linesEndsStrokeLinecap">
-              <option value="butt">Butt</option>
-              <option value="round">Round</option>
-              <option value="square">Square</option>
-            </select>
-          </div>
-
-          <div
-            class="input-group"
-            x-show="svgProperties.linesEndsType === 'arrow' || svgProperties.linesEndsType === 'reverseArrow'"
-          >
-            <label for="linesEndsStrokeLinejoin">Lines ends stroke linejoin</label>
-            <select id="linesEndsStrokeLinejoin" x-model="svgProperties.linesEndsStrokeLinejoin">
-              <option value="arcs">Arcs</option>
-              <option value="miter">Miter</option>
-              <option value="miter-clip">Miter clip</option>
-              <option value="round">Round</option>
-              <option value="bevel">Bevel</option>
-            </select>
-          </div>
-
-          <div class="input-group" x-show="svgProperties.linesEndsType.includes('square')">
-            <label for="linesEndsStrokeLinecap">Square corner radius</label>
-            <input
-              type="range"
-              id="linesEndsSquareCornerRadius"
-              min="0"
-              max="10"
-              x-model.number="svgProperties.linesEndsSquareCornerRadius"
-            />
-          </div>
+        <div class="downloadContainer">
+          <button id="downloadButton" @click="downloadAsPNG">Download as PNG</button>
         </div>
       </div>
 
@@ -650,6 +656,35 @@
             });
 
             this.generateSvg();
+          },
+
+          downloadAsPNG() {
+            const svg = document.getElementById("canvas");
+            const serializer = new XMLSerializer();
+            const svgStr = serializer.serializeToString(svg);
+
+            // Create a canvas element
+            const canvas = document.createElement("canvas");
+            canvas.width = this.svgProperties.canvasWidth;
+            canvas.height = this.svgProperties.canvasHeight;
+            const ctx = canvas.getContext("2d");
+
+            // Create an image to draw the SVG
+            const img = new Image();
+            img.src = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgStr)));
+
+            img.onload = () => {
+              // Draw the image on the canvas
+              ctx.drawImage(img, 0, 0);
+
+              // Convert canvas to PNG and download
+              const a = document.createElement("a");
+              a.download = "wallpaper.png";
+              a.href = canvas.toDataURL("image/png");
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            };
           },
         }));
       });
